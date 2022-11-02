@@ -17,13 +17,12 @@ class BooksApiTest extends TestCase
     {
         $books = Book::factory(5)->create();
 
-        $response = $this->getJson(route('books.index'));
-
-        $response->assertJsonFragment([
-            'title' => $books[0]->title
-        ])->assertJsonFragment([
-            'title' => $books[1]->title
-        ]);
+        $this->getJson(route('books.index'))
+            ->assertJsonFragment([
+                'title' => $books[0]->title
+            ])->assertJsonFragment([
+                'title' => $books[1]->title
+            ]);
     }
 
     /** @test */
@@ -31,11 +30,10 @@ class BooksApiTest extends TestCase
     {
         $book = Book::factory()->create();
 
-        $response = $this->getJson(route('books.show', $book));
-
-        $response->assertJsonFragment([
-            'title' => $book->title
-        ]);
+        $this->getJson(route('books.show', $book))
+            ->assertJsonFragment([
+                'title' => $book->title
+            ]);
     }
 
     /** @test */
